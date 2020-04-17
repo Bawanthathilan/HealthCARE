@@ -21,8 +21,8 @@ public class DoctorService {
             } else
                 System.out.println("DB connection established");
 
-            String query = " insert into doctors (`doctor_id`,`firstName`,`lastName`,`gender`,`email`,`password`,`joinedDate`,`phone`,`specialization`,`address`,`NIC`,`hospital_id`,`patient_id`,`appointment_id`)"
-                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = " insert into regDoctors (`doctor_id`,`firstName`,`lastName`,`gender`,`email`,`password`,`joinedDate`,`phone`,`specialization`,`address`,`NIC`,`hospital_id`)"
+                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
 
             preparedStmt.setInt(1, doctor.getDoctor_id());
@@ -37,8 +37,6 @@ public class DoctorService {
             preparedStmt.setString(10, doctor.getAddress());
             preparedStmt.setString(11, doctor.getNIC());
             preparedStmt.setInt(12, doctor.getHospital_id());
-            preparedStmt.setInt(13, doctor.getPatient_id());
-            preparedStmt.setInt(14, doctor.getAppointment_id());
 
 
             preparedStmt.executeUpdate();
@@ -68,8 +66,8 @@ public class DoctorService {
 
             output = new StringBuilder("<table border=\"1\"><tr><th>Doctor ID</th><th>First Name</th><th>Last Name</th><th>Gender</th>" +
                     "<th>Email</th><th>Password</th><th>Joined Date</th><th>Phone</th><th>Specialization</th>" +
-                    "<th>Address</th><th>NIC</th><th>Hospital ID</th><th>Patient ID</th><th>Appointment ID</th><th>Update</th><th>Remove</th></tr>");
-            String query = "select * from doctors";
+                    "<th>Address</th><th>NIC</th><th>Hospital ID</th><th>Update</th><th>Remove</th></tr>");
+            String query = "select * from regDoctors";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
@@ -86,8 +84,6 @@ public class DoctorService {
                 String address = rs.getString("address");
                 String NIC = rs.getString("NIC");
                 String hospital_id = String.valueOf(rs.getInt("hospital_id"));
-                String patient_id = String.valueOf(rs.getInt("patient_id"));
-                String appointment_id = String.valueOf(rs.getInt("appointment_id"));
 
 
                 output.append("<tr><td>").append(doctor_id).append("</td>");
@@ -102,8 +98,6 @@ public class DoctorService {
                 output.append("<td>").append(address).append("</td>");
                 output.append("<td>").append(NIC).append("</td>");
                 output.append("<td>").append(hospital_id).append("</td>");
-                output.append("<td>").append(patient_id).append("</td>");
-                output.append("<td>").append(appointment_id).append("</td>");
 
 
                 output.append("<td><input name=\"btnUpdate\" type=\"button\" value=\"Update\" class=\"btn btn-secondary\"></td>" + "<td><input name=\"btnRemove\" type=\"submit\" value=\"Remove\" class=\"btn btn-danger\"></td></tr>");
@@ -133,7 +127,7 @@ public class DoctorService {
             } else
                 System.out.println("DB connection established");
 
-            String query = "select * from doctors where doctor_id = '" + id + "'";
+            String query = "select * from regDoctors where doctor_id = '" + id + "'";
             assert con != null;
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -152,8 +146,6 @@ public class DoctorService {
                     doctor.setAddress(rs.getString("address"));
                     doctor.setNIC(rs.getString("NIC"));
                     doctor.setHospital_id(rs.getInt("hospital_id"));
-                    doctor.setPatient_id(rs.getInt("patient_id"));
-                    doctor.setAppointment_id(rs.getInt("appointment_id"));
 
                     System.out.println("Doctor retrieval Successful");
                     System.out.println("DB connection closed");
@@ -183,7 +175,7 @@ public class DoctorService {
             } else
                 System.out.println("DB connection established");
 
-            String query = "UPDATE doctors SET firstName=?, lastName=?, gender=?, email=?, password=?, joinedDate=?, phone=?, specialization=?, address=?, NIC=?, hospital_id=?, patient_id=?, appointment_id=? WHERE doctor_id=?";
+            String query = "UPDATE regDoctors SET firstName=?, lastName=?, gender=?, email=?, password=?, joinedDate=?, phone=?, specialization=?, address=?, NIC=?, hospital_id=? WHERE doctor_id=?";
             PreparedStatement preparedStmt = con.prepareStatement(query);
 
             preparedStmt.setString(1, doctor.getFirstName());
@@ -197,8 +189,6 @@ public class DoctorService {
             preparedStmt.setString(9, doctor.getAddress());
             preparedStmt.setString(10, doctor.getNIC());
             preparedStmt.setInt(11, doctor.getHospital_id());
-            preparedStmt.setInt(12, doctor.getPatient_id());
-            preparedStmt.setInt(13, doctor.getAppointment_id());
             preparedStmt.setInt(14, doctor.getDoctor_id());
 
             preparedStmt.executeUpdate();
@@ -225,7 +215,7 @@ public class DoctorService {
             } else
                 System.out.println("DB connection established");
 
-            String query = "delete from doctors where doctor_id=?";
+            String query = "delete from regDoctors where doctor_id=?";
 
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, doctor_id);

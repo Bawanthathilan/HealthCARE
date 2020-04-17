@@ -37,7 +37,7 @@ public class DoctorResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String insertDoctor(@FormParam("doctor_id") int doctor_id, @FormParam("firstName") String firstName, @FormParam("lastName") String lastName, @FormParam("gender") String gender,
                                @FormParam("email") String email, @FormParam("password") String password, @FormParam("joinedDate") String joinedDate, @FormParam("phone") int phone, @FormParam("specialization") String specialization, @FormParam("address") String address,
-                               @FormParam("NIC") String NIC, @FormParam("hospital_id") int hospital_id, @FormParam("patient_id") int patient_id, @FormParam("appointment_id") int appointment_id) {
+                               @FormParam("NIC") String NIC, @FormParam("hospital_id") int hospital_id) {
 
         Doctor doctor = new Doctor();
         doctor.setDoctor_id(doctor_id);
@@ -52,8 +52,6 @@ public class DoctorResource {
         doctor.setAddress(address);
         doctor.setNIC(NIC);
         doctor.setHospital_id(hospital_id);
-        doctor.setPatient_id(patient_id);
-        doctor.setAppointment_id(appointment_id);
 
         return doctorRepo.insertDoctor(doctor);
     }
@@ -63,10 +61,11 @@ public class DoctorResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public String updateDoctor(String doctorData) {
+
         Doctor doctor = new Doctor();
         JsonObject doctorObject;
-
         doctorObject = new JsonParser().parse(doctorData).getAsJsonObject();
+
         doctor.setDoctor_id(Integer.parseInt(doctorObject.get("doctor_id").getAsString()));
         doctor.setFirstName(doctorObject.get("firstName").getAsString());
         doctor.setLastName(doctorObject.get("lastName").getAsString());
@@ -79,8 +78,6 @@ public class DoctorResource {
         doctor.setAddress(doctorObject.get("address").getAsString());
         doctor.setNIC(doctorObject.get("NIC").getAsString());
         doctor.setHospital_id(Integer.parseInt(doctorObject.get("hospital_id").getAsString()));
-        doctor.setPatient_id(Integer.parseInt(doctorObject.get("patient_id").getAsString()));
-        doctor.setAppointment_id(Integer.parseInt(doctorObject.get("appointment_id").getAsString()));
 
         return doctorRepo.updateDoctor(doctor);
     }

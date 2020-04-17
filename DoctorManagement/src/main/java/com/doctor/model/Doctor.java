@@ -15,16 +15,6 @@ public class Doctor {
     private String NIC;
     private int doctor_id;
     private int hospital_id;
-    private int patient_id;
-    private int appointment_id;
-
-    public int getAppointment_id() {
-        return appointment_id;
-    }
-
-    public void setAppointment_id(int appointment_id) {
-        this.appointment_id = appointment_id;
-    }
 
     public int getHospital_id() {
         return hospital_id;
@@ -32,14 +22,6 @@ public class Doctor {
 
     public void setHospital_id(int hospital_id) {
         this.hospital_id = hospital_id;
-    }
-
-    public int getPatient_id() {
-        return patient_id;
-    }
-
-    public void setPatient_id(int patient_id) {
-        this.patient_id = patient_id;
     }
 
     public String getFirstName() {
@@ -130,8 +112,8 @@ public class Doctor {
         this.doctor_id = doctor_id;
     }
 
-    @Override
-    public String toString() {
+    @java.lang.Override
+    public java.lang.String toString() {
         return "Doctor{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -143,10 +125,8 @@ public class Doctor {
                 ", specialization='" + specialization + '\'' +
                 ", address='" + address + '\'' +
                 ", NIC='" + NIC + '\'' +
-                ", doctor_id='" + doctor_id + '\'' +
-                ", hospital_id='" + hospital_id + '\'' +
-                ", patient_id='" + patient_id + '\'' +
-                ", appointment_id='" + appointment_id + '\'' +
+                ", doctor_id=" + doctor_id +
+                ", hospital_id=" + hospital_id +
                 '}';
     }
 }
