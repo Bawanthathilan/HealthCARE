@@ -15,20 +15,20 @@ import javax.ws.rs.core.MediaType;
 
 public class DoctorResource {
 
-    private DoctorService doctorRepo = new DoctorService();
+    private DoctorService doctorService = new DoctorService();
 
     @GET
     @Path("/")
     @Produces(MediaType.TEXT_HTML)
     public String readDoctors() {
-        return doctorRepo.readDoctors();
+        return doctorService.readDoctors();
     }
 
     @GET
     @Path("doctor/{doctor_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Doctor readDoctor(@PathParam("doctor_id") String doctor_id) {
-        return doctorRepo.readDoctor(doctor_id);
+    public Doctor readDoctor(@PathParam("doctor_id") int doctor_id) {
+        return doctorService.readDoctor(doctor_id);
     }
 
     @POST
@@ -53,7 +53,7 @@ public class DoctorResource {
         doctor.setNIC(NIC);
         doctor.setHospital_id(hospital_id);
 
-        return doctorRepo.insertDoctor(doctor);
+        return doctorService.insertDoctor(doctor);
     }
 
     @PUT
@@ -79,7 +79,7 @@ public class DoctorResource {
         doctor.setNIC(doctorObject.get("NIC").getAsString());
         doctor.setHospital_id(Integer.parseInt(doctorObject.get("hospital_id").getAsString()));
 
-        return doctorRepo.updateDoctor(doctor);
+        return doctorService.updateDoctor(doctor);
     }
 
     @DELETE
@@ -91,7 +91,7 @@ public class DoctorResource {
         //Convert the input string to an XML document
         Document doc = Jsoup.parse(doctorData, "", Parser.xmlParser());
         int doctor_id = Integer.parseInt(doc.select("doctor_id").text());
-        return doctorRepo.deleteItem(doctor_id);
+        return doctorService.deleteItem(doctor_id);
     }
 }
 

@@ -7,10 +7,12 @@ import java.sql.*;
 
 public class DoctorService {
 
+    private DoctorDBConnection connection;
+
 
     public String insertDoctor(Doctor doctor) {
 
-        DoctorDBConnection connection = new DoctorDBConnection();
+        connection = new DoctorDBConnection();
         String output = "";
 
         try {
@@ -54,7 +56,8 @@ public class DoctorService {
     }
 
     public String readDoctors() {
-        DoctorDBConnection connection = new DoctorDBConnection();
+
+        connection = new DoctorDBConnection();
         StringBuilder output = new StringBuilder();
         try {
             Connection con = connection.getConnection();
@@ -116,8 +119,9 @@ public class DoctorService {
 
     }
 
-    public Doctor readDoctor(String id) {
-        DoctorDBConnection connection = new DoctorDBConnection();
+    public Doctor readDoctor(int id) {
+
+        connection = new DoctorDBConnection();
         Doctor doctor = new Doctor();
         try {
             Connection con = connection.getConnection();
@@ -127,7 +131,7 @@ public class DoctorService {
             } else
                 System.out.println("DB connection established");
 
-            String query = "select * from regDoctors where doctor_id = '" + id + "'";
+            String query = "select * from regDoctors where doctor_id = " + id;
             assert con != null;
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -166,7 +170,8 @@ public class DoctorService {
 
 
     public String updateDoctor(Doctor doctor) {
-        DoctorDBConnection connection = new DoctorDBConnection();
+
+        connection = new DoctorDBConnection();
         String output = "";
         try {
             Connection con = connection.getConnection();
@@ -204,8 +209,9 @@ public class DoctorService {
         return output;
     }
 
-    public String deleteItem(int doctor_id) {
-        DoctorDBConnection connection = new DoctorDBConnection();
+    public String deleteDoctor(int doctor_id) {
+
+        connection = new DoctorDBConnection();
         String output = "";
 
         try {
