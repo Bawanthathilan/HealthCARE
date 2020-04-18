@@ -73,7 +73,21 @@ public class Appointment {
 		this.patientID = patientID;
 	}
 	
-	
+	 @Override
+	    public String toString() {
+	        return "Doctor{" +
+	                "appID='" + appID + '\'' +
+	                ", fullName='" + fullName + '\'' +
+	                ", phoneNo='" + phoneNo + '\'' +
+	                ", email='" + email + '\'' +
+	                ", address='" + address + '\'' +
+	                ", message='" + message + '\'' +
+	                ", date=" + date +
+	                ", hospitalID='" + hospitalID + '\'' +
+	                ", docID='" + docID + '\'' +
+	                ", patientID='" + patientID + '\'' +
+	                '}';
+	    }
 	
 	
 		
