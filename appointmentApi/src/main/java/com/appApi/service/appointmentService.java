@@ -44,11 +44,11 @@ public class appointmentService {
             preparedStmt.executeUpdate();
             con.close();
             output = "Inserted successfully";
-            System.out.println("Doctor inserted successfully");
+            System.out.println("Appointment inserted successfully");
 
         } catch (Exception e) {
-            output = "Error while inserting doctor details.";
-            System.out.println("Error while inserting doctor");
+            output = "Error while inserting Appointment details.";
+            System.out.println("Error while inserting Appointment");
             System.out.println(e.getMessage());
         }
         return output;
@@ -106,7 +106,7 @@ public class appointmentService {
             System.out.println("Appointment retrieval Successful");
             con.close();
         } catch (Exception e) {
-            output = new StringBuilder("Error while reading doctors.");
+            output = new StringBuilder("Error while reading Appointment.");
             System.out.println("Appointment retrieval Unsuccessful");
             System.err.println(e.getMessage());
         }
@@ -188,10 +188,10 @@ public class appointmentService {
             preparedStmt.executeUpdate();
             con.close();
             output = "Updated successfully";
-            System.out.println("Update successful on doctor");
+            System.out.println("Update successful on Appointment");
         } catch (Exception e) {
             output = "Error while updating doctor.";
-            System.out.println("Update unsuccessful on doctor");
+            System.out.println("Update unsuccessful on Appointment");
             System.err.println(e.getMessage());
         }
         return output;
@@ -214,11 +214,11 @@ public class appointmentService {
             preparedStmt.execute();
             con.close();
             output = "Deleted successfully";
-            System.out.println("Doctor deleted successfully");
+            System.out.println("Appointment deleted successfully");
         } catch (Exception e) {
-            output = "Error while deleting doctor.";
+            output = "Error while deleting Appointment.";
             System.err.println(e.getMessage());
-            System.out.println("Doctor deletion error");
+            System.out.println("Appointment deletion error");
         }
         return output;
     }
