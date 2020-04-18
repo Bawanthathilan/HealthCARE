@@ -2,9 +2,11 @@ package com.doctor.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DoctorDBConnection {
-    Connection con = null;
+    private static Connection con = null;
 
     public DoctorDBConnection() {
 
