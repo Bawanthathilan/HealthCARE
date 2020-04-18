@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DoctorDBConnection {
+
     private static Connection con = null;
 
     public DoctorDBConnection() {
@@ -17,9 +18,9 @@ public class DoctorDBConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf", "root", "");
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             System.out.println("Driver Class Not Found");
-        }catch (SQLException e){
+        } catch (SQLException e) {
             createDatabase();
             createTable();
         }
@@ -34,11 +35,10 @@ public class DoctorDBConnection {
     private static void createDatabase() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306","root","");
+            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306", "root", "");
             Statement s = con.createStatement();
             s.executeUpdate("CREATE DATABASE IF NOT EXISTS paf");
-        }
-        catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
@@ -52,11 +52,9 @@ public class DoctorDBConnection {
             //The next line has the issue
             s.executeUpdate(myTableName);
             System.out.println("Table Created");
-        }
-        catch (SQLException e ) {
+        } catch (SQLException e) {
             System.out.println("An error has occurred on Table Creation");
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println("An Mysql drivers were not found");
         }
     }

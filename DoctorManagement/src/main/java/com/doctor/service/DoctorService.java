@@ -8,8 +8,7 @@ import java.sql.*;
 public class DoctorService {
 
     private DoctorDBConnection connection;
-
-
+    
     public String insertDoctor(Doctor doctor) {
 
         connection = new DoctorDBConnection();
@@ -157,7 +156,6 @@ public class DoctorService {
                     return doctor;
                 }
             }
-
 
         } catch (Exception e) {
             System.out.println("Error while reading doctor. Doctor retrieval Unsuccessful");

@@ -88,7 +88,6 @@ public class DoctorResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String deleteDoctor(String doctorData) {
 
-        //Convert the input string to an XML document
         Document doc = Jsoup.parse(doctorData, "", Parser.xmlParser());
         int doctor_id = Integer.parseInt(doc.select("doctor_id").text());
         return doctorService.deleteItem(doctor_id);
