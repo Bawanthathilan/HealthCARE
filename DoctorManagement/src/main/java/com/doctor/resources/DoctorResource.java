@@ -56,6 +56,19 @@ public class DoctorResource {
         return doctorService.insertDoctor(doctor);
     }
 
+    @POST
+    @Path("/loginDoc")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String loginDoctor(@FormParam("email") String email, @FormParam("password") String password) {
+
+        Doctor doctor = new Doctor();
+        doctor.setEmail(email);
+        doctor.setPassword(password);
+
+        return doctorService.loginDoctor(doctor);
+    }
+
     @PUT
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -88,9 +101,10 @@ public class DoctorResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String deleteDoctor(String doctorData) {
 
+        //Convert the input string to an XML document
         Document doc = Jsoup.parse(doctorData, "", Parser.xmlParser());
         int doctor_id = Integer.parseInt(doc.select("doctor_id").text());
-        return doctorService.deleteItem(doctor_id);
+        return doctorService.deleteDoctor(doctor_id);
     }
 }
 

@@ -7,15 +7,16 @@ import java.sql.*;
 
 public class DoctorService {
 
+    private Connection con;
     private DoctorDBConnection connection;
-    
+
     public String insertDoctor(Doctor doctor) {
 
         connection = new DoctorDBConnection();
         String output = "";
 
         try {
-            Connection con = connection.getConnection();
+            con = connection.getConnection();
 
             if (con == null) {
                 return "Error while connecting to the database for inserting.";
@@ -59,7 +60,7 @@ public class DoctorService {
         connection = new DoctorDBConnection();
         StringBuilder output = new StringBuilder();
         try {
-            Connection con = connection.getConnection();
+            con = connection.getConnection();
 
             if (con == null) {
                 return "Error while connecting to the database for reading.";
@@ -115,7 +116,6 @@ public class DoctorService {
             System.err.println(e.getMessage());
         }
         return output.toString();
-
     }
 
     public Doctor readDoctor(int id) {
@@ -123,14 +123,14 @@ public class DoctorService {
         connection = new DoctorDBConnection();
         Doctor doctor = new Doctor();
         try {
-            Connection con = connection.getConnection();
+            con = connection.getConnection();
 
             if (con == null) {
                 System.out.println("Error while connecting to the database for reading.");
             } else
                 System.out.println("DB connection established");
 
-            String query = "select * from regDoctors where doctor_id = " + id;
+            String query = "select * from regDoctors where doctor_id = '" + id + "'";
             assert con != null;
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -157,6 +157,7 @@ public class DoctorService {
                 }
             }
 
+
         } catch (Exception e) {
             System.out.println("Error while reading doctor. Doctor retrieval Unsuccessful");
             System.err.println(e.getMessage());
@@ -172,7 +173,7 @@ public class DoctorService {
         connection = new DoctorDBConnection();
         String output = "";
         try {
-            Connection con = connection.getConnection();
+            con = connection.getConnection();
             if (con == null) {
                 return "Error while connecting to the database for updating.";
             } else
@@ -192,7 +193,7 @@ public class DoctorService {
             preparedStmt.setString(9, doctor.getAddress());
             preparedStmt.setString(10, doctor.getNIC());
             preparedStmt.setInt(11, doctor.getHospital_id());
-            preparedStmt.setInt(14, doctor.getDoctor_id());
+            preparedStmt.setInt(12, doctor.getDoctor_id());
 
             preparedStmt.executeUpdate();
             con.close();
@@ -213,7 +214,7 @@ public class DoctorService {
         String output = "";
 
         try {
-            Connection con = connection.getConnection();
+            con = connection.getConnection();
             if (con == null) {
                 return "Error while connecting to the database for deleting.";
             } else
@@ -232,6 +233,43 @@ public class DoctorService {
             output = "Error while deleting doctor.";
             System.err.println(e.getMessage());
             System.out.println("Doctor deletion error");
+        }
+        return output;
+    }
+
+    public String loginDoctor(Doctor doctor) {
+
+        String output = "";
+
+        connection = new DoctorDBConnection();
+
+        try {
+            con = connection.getConnection();
+
+            if (con == null) {
+                System.out.println("Error while connecting to the database for reading.");
+            } else
+                System.out.println("DB connection established");
+
+            String query = "select * from regDoctors where email = '" + doctor.getEmail() + "' AND password = '" + doctor.getPassword() + "'";
+            assert con != null;
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            if (rs.next()) {
+
+                if (doctor.getEmail().equals(rs.getString("email")) && doctor.getPassword().equals(rs.getString("password")))
+                    output = "Doctor login Successful";
+
+            } else output = "Doctor login unsuccessful";
+
+            System.out.println("DB connection closed");
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println("Error while reading doctor. Doctor login Unsuccessful");
+            System.err.println(e.getMessage());
+            output = "No such doctor in system";
         }
         return output;
     }
