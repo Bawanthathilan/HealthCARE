@@ -50,7 +50,6 @@ public class DoctorDBConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Doctor", "root", "");
             Statement s = con.createStatement();
-            //The next line has the issue
             s.executeUpdate(myTableName);
             System.out.println("Table Created");
         }
