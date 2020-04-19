@@ -75,7 +75,7 @@ public class Appointment {
 	
 	 @Override
 	    public String toString() {
-	        return "Doctor{" +
+	        return "Appointment{" +
 	                "appID='" + appID + '\'' +
 	                ", fullName='" + fullName + '\'' +
 	                ", phoneNo='" + phoneNo + '\'' +
